@@ -1,0 +1,182 @@
+[
+  {
+    "category": "exact_match",
+    "description": "Базовое определение (Алгебра)",
+    "question": "Что такое дискриминант квадратного уравнения?",
+    "expected_behavior": "Система должна привести определение и формулу D = b^2 - 4ac."
+  },
+  {
+    "category": "exact_match",
+    "description": "Базовое определение (Геометрия)",
+    "question": "Напиши формулу площади круга.",
+    "expected_behavior": "Система должна вернуть формулу S = pi * r^2."
+  },
+  {
+    "category": "exact_match",
+    "description": "Точный поиск теоремы",
+    "question": "Сформулируй теорему Пифагора.",
+    "expected_behavior": "Система должна найти формулировку: сумма квадратов катетов равна квадрату гипотенузы."
+  },
+  {
+    "category": "exact_match",
+    "description": "Определение фигуры",
+    "question": "Что такое равнобедренный треугольник?",
+    "expected_behavior": "Ответ: треугольник, у которого две стороны равны."
+  },
+  {
+    "category": "exact_match",
+    "description": "Математическое свойство",
+    "question": "Чему равна сумма углов треугольника?",
+    "expected_behavior": "Ответ: 180 градусов."
+  },
+  {
+    "category": "exact_match",
+    "description": "Алгебраическое понятие",
+    "question": "Что такое корень уравнения?",
+    "expected_behavior": "Определение значения переменной, при котором уравнение становится верным равенством."
+  },
+  {
+    "category": "semantic_search",
+    "description": "Синонимичный запрос (Круг)",
+    "question": "Как найти пространство внутри окружности?",
+    "expected_behavior": "Система должна понять, что речь идет о 'площади круга'."
+  },
+  {
+    "category": "semantic_search",
+    "description": "Синонимичный запрос (Радиус)",
+    "question": "Как называется отрезок от центра фигуры до её границы?",
+    "expected_behavior": "Система должна идентифицировать термин 'радиус'."
+  },
+  {
+    "category": "semantic_search",
+    "description": "Описательный запрос (Прямоугольный треугольник)",
+    "question": "Как называется треугольник, у которого один угол составляет 90 градусов?",
+    "expected_behavior": "Ответ: Прямоугольный треугольник."
+  },
+  {
+    "category": "semantic_search",
+    "description": "Неявный запрос (Дискриминант)",
+    "question": "Какой параметр показывает, сколько решений имеет квадратное уравнение?",
+    "expected_behavior": "Система должна найти информацию о дискриминанте."
+  },
+  {
+    "category": "semantic_search",
+    "description": "Синонимы операций",
+    "question": "Результат перемножения ширины на высоту прямоугольника.",
+    "expected_behavior": "Система должна определить это как 'площадь прямоугольника'."
+  },
+  {
+    "category": "semantic_search",
+    "description": "Концептуальный вопрос",
+    "question": "В чем разница между диаметром и радиусом?",
+    "expected_behavior": "Система должна найти определения обоих терминов и сопоставить их (d = 2r)."
+  },
+  {
+    "category": "reasoning",
+    "description": "Вычисление (Новые данные)",
+    "question": "Вычисли площадь круга, если радиус равен 10.",
+    "expected_behavior": "Применение формулы S=pi*r^2 для r=10 -> 100pi."
+  },
+  {
+    "category": "reasoning",
+    "description": "Вычисление (Теорема Пифагора)",
+    "question": "Найди гипотенузу, если катеты равны 3 и 4.",
+    "expected_behavior": "Применение c^2 = a^2 + b^2 -> c=5."
+  },
+  {
+    "category": "reasoning",
+    "description": "Логический вывод (Корни)",
+    "question": "Сколько корней у уравнения, если дискриминант равен нулю?",
+    "expected_behavior": "Вывод на основе правил: D=0 -> один корень."
+  },
+  {
+    "category": "reasoning",
+    "description": "Вычисление (Периметр)",
+    "question": "Чему равен периметр квадрата со стороной 6?",
+    "expected_behavior": "Применение формулы P=4a -> 24."
+  },
+  {
+    "category": "reasoning",
+    "description": "Обратная задача",
+    "question": "Если диаметр равен 20, чему равен радиус?",
+    "expected_behavior": "Логический вывод r = d/2 -> 10."
+  },
+  {
+    "category": "reasoning",
+    "description": "Сравнение фигур",
+    "question": "Может ли прямоугольник быть квадратом?",
+    "expected_behavior": "Аналитический ответ: да, если все стороны равны."
+  },
+  {
+    "category": "reasoning",
+    "description": "Сложное вычисление",
+    "question": "Вычисли дискриминант для уравнения x^2 + 2x + 1 = 0.",
+    "expected_behavior": "Подстановка a=1, b=2, c=1 в b^2-4ac -> 4-4=0."
+  },
+  {
+    "category": "reasoning",
+    "description": "Применение свойств",
+    "question": "Один угол треугольника 90 градусов, второй 30. Чему равен третий?",
+    "expected_behavior": "180 - 90 - 30 = 60."
+  },
+  {
+    "category": "negative_test",
+    "description": "Out-of-Domain (Кулинария)",
+    "question": "Как приготовить борщ?",
+    "expected_behavior": "Система должна ответить, что информации нет."
+  },
+  {
+    "category": "negative_test",
+    "description": "Out-of-Domain (География)",
+    "question": "Какая столица у Австралии?",
+    "expected_behavior": "Отказ отвечать из-за отсутствия контекста."
+  },
+  {
+    "category": "negative_test",
+    "description": "Out-of-Domain (Литература)",
+    "question": "Кто написал 'Войну и мир'?",
+    "expected_behavior": "Отказ отвечать."
+  },
+  {
+    "category": "negative_test",
+    "description": "Out-of-Domain (Программирование)",
+    "question": "Как написать цикл на Python?",
+    "expected_behavior": "Отказ отвечать (если в базе только математика)."
+  },
+  {
+    "category": "negative_test",
+    "description": "Out-of-Domain (Медицина)",
+    "question": "Как лечить простуду?",
+    "expected_behavior": "Отказ отвечать."
+  },
+  {
+    "category": "complex_query",
+    "description": "Мульти-документный запрос",
+    "question": "Сравни формулы площади круга и квадрата.",
+    "expected_behavior": "Система должна извлечь две формулы и привести их в одном ответе."
+  },
+  {
+    "category": "complex_query",
+    "description": "Синтез определений",
+    "question": "Какие типы уравнений существуют?",
+    "expected_behavior": "Обобщение информации о линейных, квадратных и других уравнениях из базы."
+  },
+  {
+    "category": "complex_query",
+    "description": "Взаимосвязь понятий",
+    "question": "Как связаны площадь круга и число Пи?",
+    "expected_behavior": "Объяснение зависимости S от числа Пи."
+  },
+  {
+    "category": "complex_query",
+    "description": "Условие существования",
+    "question": "При каких условиях треугольник существует?",
+    "expected_behavior": "Поиск неравенства треугольника (сумма двух сторон больше третьей)."
+  },
+  {
+    "category": "complex_query",
+    "description": "Классификация",
+    "question": "Перечисли виды треугольников по углам.",
+    "expected_behavior": "Остроугольные, прямоугольные, тупоугольные."
+  }
+]
