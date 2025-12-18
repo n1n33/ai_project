@@ -23,7 +23,9 @@ def get_rag_chain(config, vector_db: VectorDB):
         base_url=config['ollama_base_url'],
         temperature=0.1,
         # num_ctx передается в ollama, но лучше зафиксировать это в Modelfile
-        keep_alive="5m"
+        keep_alive="5m",
+        num_ctx = 4096,  # Размер контекста (влияет на память)
+        num_gpu = 999,  # Число слоев для переноса на GPU (999 = все слои)
     )
 
     # 4. Системный промпт

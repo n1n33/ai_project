@@ -1,21 +1,21 @@
 import statistics
 from datetime import datetime
+import os
 
 
 def generate_markdown_report(results, total_time, output_file, model_name):
     """
-    Формирует официальный отчет о результатах тестирования системы.
+    Формирует официальный отчет (сводка + ошибки).
+    (Код этой функции остается без изменений, как в вашем примере)
     """
     if not results:
         print("[WARNING] Данные для формирования отчета отсутствуют.")
         return
 
-    # Расчет статистических показателей
     scores = [r['score'] for r in results]
     latencies = [r['latency'] for r in results]
     avg_score = statistics.mean(scores) if scores else 0
 
-    # Формирование документа
     report = f"""# Протокол тестирования аналитической системы
 
 **Дата формирования:** {datetime.now().strftime("%Y-%m-%d %H:%M")}
@@ -49,10 +49,43 @@ def generate_markdown_report(results, total_time, output_file, model_name):
 * **Время обработки:** {r['latency']:.2f} с
 ---
 """
-
     try:
+        abs_path = os.path.abspath(output_file)
         with open(output_file, "w", encoding="utf-8") as f:
             f.write(report)
-        print(f"[INFO] Отчет успешно сохранен в файл: {output_file}")
+        print(f"[INFO] Отчет успешно сохранен в файл: {abs_path}")
     except IOError as e:
         print(f"[ERROR] Ошибка записи файла отчета: {e}")
+
+
+# --- НОВАЯ ФУНКЦИЯ ДЛЯ ЛОГОВ ---
+def save_detailed_logs(results, output_file):
+    """
+    Сохраняет полный лог всех запросов и ответов (Q&A) в отдельный файл.
+    """
+    if not results:
+        return
+
+    log_content = f"# Полный лог тестирования (Q&A)\n"
+    log_content += f"**Дата:** {datetime.now().strftime('%Y-%m-%d %H:%M')}\n"
+    log_content += f"**Всего запросов:** {len(results)}\n\n"
+    log_content += "---\n"
+
+    for i, row in enumerate(results, 1):
+
+        log_content += f"## {i}. {row['question']}\n\n"
+        log_content += f"- **Категория:** {row['category']}\n"
+        log_content += f"(Оценка: {row['score']})\n"
+        log_content += f"- **Время:** {row['latency']:.2f} сек\n\n"
+        log_content += f"### Ответ системы:\n"
+        # Используем цитирование для ответа, чтобы отделить его визуально
+        log_content += f"> {row['prediction'].replace(chr(10), chr(10) + '> ')}\n\n"
+        log_content += "---\n\n"
+
+    try:
+        abs_path = os.path.abspath(output_file)
+        with open(output_file, "w", encoding="utf-8") as f:
+            f.write(log_content)
+        print(f"[INFO] Полные логи сохранены в файл: {abs_path}")
+    except IOError as e:
+        print(f"[ERROR] Ошибка записи лог-файла: {e}")

@@ -5,7 +5,8 @@ from collections import defaultdict
 from src.config import load_config
 from src.vector_store import VectorDB
 from src.rag_chain import get_rag_chain
-from src.visualization import generate_markdown_report
+# Импортируем обе функции
+from src.visualization import generate_markdown_report, save_detailed_logs
 
 
 def run():
@@ -16,7 +17,7 @@ def run():
     rag_chain = get_rag_chain(config, vdb)
 
     if not rag_chain:
-        print("[ERROR] Не удалось инициализировать RAG-цепочку. Проверьте наличие векторного индекса.")
+        print("[ERROR] Не удалось инициализировать RAG-цепочку.")
         return
 
     # 2. Загрузка датасета
@@ -54,7 +55,6 @@ def run():
         if len(prediction) > 20:
             score += 2
 
-        # Корректировка для негативных тестов
         if "generalization" in item['category'] and not context_found and "нет информации" in prediction.lower():
             score = 5
 
@@ -71,18 +71,23 @@ def run():
 
     total_time = sum(r['latency'] for r in results)
 
-    # Вывод статистики в консоль
     print("\n[SUMMARY] Результаты тестирования по категориям:")
     for cat, scores in category_metrics.items():
         avg = statistics.mean(scores)
         print(f"   - {cat}: {avg:.2f} / 5.00")
 
-    # Генерация отчета
+    # 1. Генерация сводного отчета (Оценка качества)
     generate_markdown_report(
         results=results,
         total_time=total_time,
         output_file="VALIDATION_REPORT.md",
-        model_name=f"{config['app_name']} v1.0"
+        model_name=f"{config['app_name']} v0.0.1"
+    )
+
+    # 2. Генерация полного лога (Вопрос-Ответ) - НОВОЕ
+    save_detailed_logs(
+        results=results,
+        output_file="FULL_TEST_LOGS.md"
     )
 
 
